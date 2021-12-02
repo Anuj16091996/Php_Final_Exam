@@ -9,6 +9,26 @@ if(isset($_GET['error'])){
 if(isset($_GET['copyerror'])){
     echo '<script>alert("Log In First")</script>';
 }
+
+if(isset($_GET['nameerror'])){
+    echo '<script>alert("Invalid Name Try Again")</script>';
+}
+if(isset($_GET['ageerror'])){
+    echo '<script>alert("Invalid Age or DOB Try Again")</script>';
+}
+
+if(isset($_GET['city'])){
+    echo '<script>alert("Invalid Input City")</script>';
+}
+
+if(isset($_GET['imgtype'])){
+    echo '<script>alert("Invalid Image Type")</script>';
+}
+
+if(isset($_GET['imgtypes'])){
+    echo '<script>alert("File To Big")</script>';
+}
+
 ?>
 
 <html>
@@ -40,11 +60,11 @@ if(isset($_GET['copyerror'])){
                 <form action="../Control/loginValidation.php" method="post">
                     <div class="form-item form-type-textfield form-item-name">
                         <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" id="edit-name" value="anuj161996@gmail.com" name="username" value="" size="60" maxlength="60" class="form-text required">
+                        <input type="text" id="edit-name"  name="username" value="" size="60" maxlength="60" class="form-text required">
                     </div>
                     <div class="form-item form-type-password form-item-pass">
                         <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="password" id="edit-pass" name="userPass" value="Admin@123" size="60" maxlength="128" class="form-text required">
+                        <input type="password" id="edit-pass" name="userPass" size="60" maxlength="128" class="form-text required">
                     </div>
                     <div class="form-actions">
                         <input type="submit"  name="Submit" value="Log in" class="btn_1 submit">

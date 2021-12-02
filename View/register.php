@@ -64,38 +64,38 @@ if(isset($_GET['imgtypes'])){
                 <form action="../Control/validation.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" value="an@gmai.com" required id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
+                        <input type="text"  required id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
                     </div>
 
 
 
                     <div class="form-group">
                         <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="password" value="qwe"  required id="edit-pass" name="pass" size="60" maxlength="128" class="form-text required">
+                        <input type="password"  required id="edit-pass" name="pass" size="60" maxlength="128" class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">Confrim Password <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="password" value="qwe" required id="edit-pass" name="cpass" size="60" maxlength="128" class="form-text required">
+                        <input type="password"  required id="edit-pass" name="cpass" size="60" maxlength="128" class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="number" value="25"  required id="edit-pass" name="age" size="60" maxlength="128" class="form-text required">
+                        <input type="number"   required id="edit-pass" name="age" size="60" maxlength="128" class="form-text required">
                     </div>
                     <div class="form-group">
                         <label for="edit-pass">FirstName <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" required value="qwe" id="edit-pass" name="fname" size="60" maxlength="128" class="form-text required">
+                        <input type="text" required  id="edit-pass" name="fname" size="60" maxlength="128" class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">LastName <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text"  value="qwe" required id="edit-pass" name="lname" size="60" maxlength="128" class="form-text required">
+                        <input type="text"   required id="edit-pass" name="lname" size="60" maxlength="128" class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">City <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" required value="qwe"  id="edit-pass" name="city" size="60" maxlength="128" class="form-text required">
+                        <input type="text" required   id="edit-pass" name="city" size="60" maxlength="128" class="form-text required">
                     </div>
 
                     <div class="form-group">
@@ -104,7 +104,12 @@ if(isset($_GET['imgtypes'])){
                     </div>
 
 
+                    <div class="form-group">
+                        <label for="edit-pass">About YourSelf <span class="form-required" title="This field is required.">*</span></label>
+                        <textarea id="w3review" name="AboutUser" rows="4" cols="50">
 
+                        </textarea>
+                    </div>
 
 
                     <div class="form-group form-group1">

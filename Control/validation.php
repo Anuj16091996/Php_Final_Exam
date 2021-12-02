@@ -5,7 +5,7 @@ require_once "../Model/Images.php";
 require_once "../Model/CustomerPrefrence.php";
 require_once "../Model/FavroiteDatabase.php";
 session_start();
-$allUserValues = array("email" => "", "password" => "", "city" => "", "age" => "", "firstname" => "", "lastname" => "", "sex" => "", "dob" => "");
+$allUserValues = array("email" => "", "password" => "","AboutUser"=>"", "city" => "", "age" => "", "firstname" => "", "lastname" => "", "sex" => "", "dob" => "");
 if (!isset($_POST["Submit"])) {
     header('Location: ../View/register.php?error');
 }
@@ -19,6 +19,8 @@ $lastName = validate_input($_POST['lname']);
 $sex = validate_input($_POST['radio']);
 $dob = validate_input($_POST['dob']);
 $city = validate_input($_POST['city']);
+$aboutUser=$_POST['AboutUser'];
+$allUserValues["AboutUser"]=$aboutUser;
 $allUserValues["email"] = $email;
 $allUserValues["sex"] = $sex;
 

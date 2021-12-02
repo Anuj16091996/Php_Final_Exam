@@ -61,6 +61,12 @@ public static function GetSearchFromLike1($search){
     return $finalResult;
 }
 
+    public static function UpdateIntoPrefrence($CustomerID,$like1,$like2,$like3,$IntrestedIn){
+        $stmt=new DatabaseConnection();
+        $value=$stmt->GetConnect();
 
+        $query="update dating.customerprefrence set Like1='$like1',Like2='$like2',Like3='$like3',IntrestedIn='$IntrestedIn' where CustomerID='$CustomerID'";
+        $value->exec($query);
+    }
 
 }

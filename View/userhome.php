@@ -36,6 +36,12 @@ $allPrfoiles = CustomerTable::GetWholeTableDetails($userSex);
 $userLike=FavroiteDatabase::LikeUser($UserID);
 $partnerLike=FavroiteDatabase::UserLike($UserID);
 
+if(isset($_GET['suc'])){
+    echo '<script>alert("Deatils Updated")</script>';
+}
+
+
+
 ?>
 
 
@@ -120,6 +126,11 @@ $partnerLike=FavroiteDatabase::UserLike($UserID);
                     <td class="day_label">About Me :</td>
                     <td class="day_value"><?php echo $allDeatils[0]['AboutMe']; ?></td>
                 </tr>
+
+                <tr class="opened">
+                    <td class="day_label">Intrested In :</td>
+                    <td class="day_value"><?php echo $allPrefrence[0]['IntrestedIn']; ?></td>
+                </tr>
                 <tr class="closed">
                     <td class="day_label">Things I prefer :</td>
                     <td class="day_value closed"><span><?php echo $allPrefrence[0]['Like3']; ?></span></td>
@@ -151,7 +162,7 @@ $partnerLike=FavroiteDatabase::UserLike($UserID);
     <li role="presentation"><a href="ModifyPersonalDetails.php" role="tab" id="profile-tab" data-toggle="tab"
                                aria-controls="profile">Modify your Personal Details</a></li>
 
-    <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab"
+    <li role="presentation"><a href="ModifyPrefrence.php" role="tab" id="profile-tab" data-toggle="tab"
                                aria-controls="profile">Modify your Prefrences</a></li>
 
     </ul>

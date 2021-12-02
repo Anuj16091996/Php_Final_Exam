@@ -34,10 +34,11 @@ class CustomerTable{
         $userSex=$_SESSION["UserData"]['sex'];
         $userDob=$_SESSION['UserData']['dob'];
         $userCity=$_SESSION['UserData']['city'];
+        $aboutUser=$_SESSION["UserData"]["AboutUser"];
             $stmt=new DatabaseConnection();
             $value=$stmt->GetConnect();
 
-            $query="Insert into dating.customer(Email, FirstName, LastName, City, Age, Sex, DateOfBirth, Password) values('$userEmail','$userFirstName','$userLastName','$userCity','$userAge','$userSex','$userDob','$userPassword')";
+            $query="Insert into dating.customer(Email, FirstName, LastName, City, Age, Sex, DateOfBirth, Password,AboutMe) values('$userEmail','$userFirstName','$userLastName','$userCity','$userAge','$userSex','$userDob','$userPassword','$aboutUser')";
             $value->exec($query);
 
 
@@ -116,5 +117,26 @@ class CustomerTable{
         $result->execute();
         $result->setFetchMode(PDO::FETCH_ASSOC);
         return $result->fetchAll();
+    }
+
+    public static function UpdateUser(){
+        $stmt=new DatabaseConnection();
+        $value=$stmt->GetConnect();
+        $userEmail=$_SESSION["ModifyUser"]['email'];
+
+        $userAge=$_SESSION["ModifyUser"]['age'];
+        $userFirstName=$_SESSION["ModifyUser"]['firstname'];
+        $userLastName=$_SESSION["ModifyUser"]['lastname'];
+        $userSex=$_SESSION["ModifyUser"]['sex'];
+        $userDob=$_SESSION['ModifyUser']['dob'];
+        $userCity=$_SESSION['ModifyUser']['city'];
+        $aboutUser=$_SESSION["ModifyUser"]["AboutUser"];
+
+
+
+        $query="UPDATE  dating.customer set FirstName='$userFirstName',LastName='$userLastName',Age='$userAge',Sex='$userSex',AboutMe='$aboutUser',DateOfBirth='$userDob', City='$userCity' where Email='$userEmail'";
+        $result= $value->prepare($query);
+        $result->execute();
+        $result->setFetchMode(PDO::FETCH_ASSOC);
     }
 }

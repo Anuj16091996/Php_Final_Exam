@@ -39,7 +39,7 @@ $userEmail=$_SESSION['CustomerID'];
     <div class="services">
         <div class="col-sm-6 login_left">
 
-            <form action="../Control/validation.php" method="post" enctype="multipart/form-data">
+            <form action="../Control/ModifyValidation.php" method="post" enctype="multipart/form-data">
 
 
                 <div class="form-group">
@@ -68,6 +68,12 @@ $userEmail=$_SESSION['CustomerID'];
 
 
 
+                <div class="form-group">
+                    <label for="edit-pass">About YourSelf <span class="form-required" title="This field is required.">*</span></label>
+                    <textarea id="w3review" name="AboutUser" rows="4" cols="50">
+
+                    </textarea>
+                </div>
 
 
                 <div class="form-group form-group1">
