@@ -19,6 +19,7 @@ CREATE TABLE customer(
 
 drop TABLE if EXISTS Images;
 CREATE TABLE Images(
+    ImageID  int PRIMARY KEY AUTO_INCREMENT not null,
    CustomerID  int, 
     ImageName VARCHAR(300),
     FOREIGN KEY(CustomerID) REFERENCES customer(CustomerID)
@@ -27,6 +28,7 @@ CREATE TABLE Images(
 
 drop TABLE if EXISTS CustomerPrefrence;
 CREATE TABLE CustomerPrefrence(
+    CustomerPrefrence  int PRIMARY KEY AUTO_INCREMENT not null,
     CustomerID  int,
     Like1 VARCHAR(100),
     Like2 VARCHAR(100),
@@ -37,6 +39,7 @@ CREATE TABLE CustomerPrefrence(
 
 drop TABLE if EXISTS favorite;
 CREATE TABLE favorite(
+    favorite  int PRIMARY KEY AUTO_INCREMENT not null,
     CustomerID  int,
    ParnerId int,
     FOREIGN KEY(CustomerID) REFERENCES customer(CustomerID),
@@ -45,6 +48,7 @@ CREATE TABLE favorite(
 
 drop TABLE if EXISTS Message;
 CREATE TABLE Message(
+      Message  int PRIMARY KEY AUTO_INCREMENT not null,
     SenderID  int,
   	ReciverID int,
     MESSAGE varchar(255),
