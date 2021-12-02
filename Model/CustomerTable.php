@@ -106,4 +106,15 @@ class CustomerTable{
         $result->setFetchMode(PDO::FETCH_ASSOC);
         return $result->fetchAll();
     }
+
+
+    public static function GetNameOfUser($partnerID){
+        $stmt=new DatabaseConnection();
+        $value=$stmt->GetConnect();
+        $query="select FirstName, LastName from customer where CustomerID='$partnerID'";
+        $result= $value->prepare($query);
+        $result->execute();
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        return $result->fetchAll();
+    }
 }

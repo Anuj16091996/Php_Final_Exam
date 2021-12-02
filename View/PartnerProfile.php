@@ -2,16 +2,20 @@
 require_once "../Model/CustomerTable.php";
 require_once "../Model/Images.php";
 require_once "../Model/CustomerPrefrence.php";
+require_once "../Model/FavroiteDatabase.php";
 session_start();
 if (!isset($_SESSION['userEmail'])) {
     header('Location: ../View/login.php?copyerror');
 }
 
 $id = $_GET['id'];
-$CustomerID=json_decode($id);
-$_SESSION["PartnerID"]=$CustomerID;
-$allProfileDetail=CustomerTable::GetMatchTable($CustomerID);
+$partnerID=json_decode($id);
+$_SESSION["PartnerID"]=$partnerID;
+$customerID=$_SESSION["CustomerID"];
 
+$allProfileDetail=CustomerTable::GetMatchTable($partnerID);
+$buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
+//True Means Null
 
 ?>
 <html>
@@ -113,8 +117,16 @@ $allProfileDetail=CustomerTable::GetMatchTable($CustomerID);
 </div>
 <div class="container">
     <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist">
-        <li role="presentation" class=""><a href="../Control/FavroiteValidation.php?id=<?=$CustomerID?>" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Add To Your Favorite</a></li>
-        <li role="presentation"><a href="./message.php?id=<?=$CustomerID?>" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Message</a></li>
+        <?php
+        if($buttonValue==true){?>
+            <li role="presentation" class=""><a href="../Control/FavroiteValidation.php?id=<?=$partnerID?>" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Add To Your Favorite</a></li>
+        <?php
+        }else{?>
+            <li role="presentation" class=""><a href="../Control/RemoveFromFavValidation.php?id=<?=$partnerID?>" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Remove From Your Favorite</a></li>
+        <?php
+        }?>
+
+        <li role="presentation"><a href="./message.php?id=<?=$partnerID?>" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Message</a></li>
     </ul>
 </div>
 

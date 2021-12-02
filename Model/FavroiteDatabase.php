@@ -10,6 +10,21 @@ public static function InsertIntoFav($CustomerID){
     $value->exec($query);
 }
 
+public static function CheckFav($customerID,$partnerID):bool{
+    $stmt=new DatabaseConnection();
+    $value=$stmt->GetConnect();
+
+    $checkQuery="select CustomerID,ParnerId from favorite where CustomerID='$customerID' and ParnerId='$partnerID'";
+    $result= $value->prepare($checkQuery);
+    $result->execute();
+    $result->setFetchMode(PDO::FETCH_ASSOC);
+    if($result->fetchAll()==null){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 
 public static function InsertToFavroiteThroughProfile($customerID,$partnerID):bool{
     $stmt=new DatabaseConnection();
@@ -27,6 +42,18 @@ public static function InsertToFavroiteThroughProfile($customerID,$partnerID):bo
         return true;
     }
 }
+
+
+     public static function DeleteToFavroiteThroughProfile($customerID,$partnerID):bool
+     {
+         $stmt = new DatabaseConnection();
+         $value = $stmt->GetConnect();
+
+         $query = "Delete from dating.favorite where CustomerID='$customerID' and ParnerId='$partnerID'";
+         $value->exec($query);
+         return false;
+     }
+
 
 public static function LikeUser($UserID){
     $stmt=new DatabaseConnection();

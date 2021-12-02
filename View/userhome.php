@@ -15,6 +15,13 @@ if(isset($_GET['SucessFav'])){
     echo '<script>alert("Added To Favorite.")</script>';
 }
 
+if(isset($_GET['SucessFavR'])){
+    echo '<script>alert("Remove From Favorite.")</script>';
+}
+
+
+
+
 $imageClass = new Images();
 $userEmail = $_SESSION['userEmail'];
 $UserName = CustomerTable::GetName($userEmail);
@@ -140,6 +147,12 @@ $partnerLike=FavroiteDatabase::UserLike($UserID);
 
         <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab"
                                    aria-controls="profile">See Who You Add as Your Favroite</a></li>
+
+    <li role="presentation"><a href="ModifyPersonalDetails.php" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Modify your Personal Details</a></li>
+
+    <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Modify your Prefrences</a></li>
 
     </ul>
 </div>

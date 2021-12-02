@@ -13,7 +13,7 @@ class MessageDataBase{
     public static function GetAllMessages($userID,$PartnerID){
         $stmt=new DatabaseConnection();
         $value=$stmt->GetConnect();
-        $query = "SELECT * from message where (message.SenderID='$userID' and message.ReciverID='$PartnerID') or (message.SenderID='$PartnerID' or message.ReciverID='$userID') ";
+        $query = "SELECT message.SenderID,message.ReciverID, message.MESSAGE,message.Time,customer.FirstName,customer.LastName  from message join customer on customer.CustomerID=message.ReciverID where (message.SenderID='$userID' and message.ReciverID='$PartnerID') or (message.SenderID='$PartnerID' and message.ReciverID='$userID')";
         $result= $value->prepare($query);
         $result->execute();
         $result->setFetchMode(PDO::FETCH_ASSOC);
