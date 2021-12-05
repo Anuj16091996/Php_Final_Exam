@@ -3,18 +3,29 @@ require_once "../Model/CustomerTable.php";
 require_once "../Model/Images.php";
 require_once "../Model/CustomerPrefrence.php";
 require_once "../Model/FavroiteDatabase.php";
+require_once "../Model/WinkDatabase.php";
 session_start();
 if (!isset($_SESSION['userEmail'])) {
     header('Location: ../View/login.php?copyerror');
 }
 
-$id = $_GET['id'];
-$partnerID=json_decode($id);
-$_SESSION["PartnerID"]=$partnerID;
-$customerID=$_SESSION["CustomerID"];
 
-$allProfileDetail=CustomerTable::GetMatchTable($partnerID);
-$buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
+$id = $_GET['id'];
+$partnerID = json_decode($id);
+$_SESSION["PartnerID"] = $partnerID;
+$userID = $_SESSION["CustomerID"];
+$winkValue = false;
+if (isset($_GET["wink"])) {
+    WinkDatabase::InsertToWinkTable($userID, $partnerID);
+    $winkValue = true;
+}
+
+if (isset($_GET["Suc"])) {
+    $winkValue = true;
+}
+
+$allProfileDetail = CustomerTable::GetMatchTable($partnerID);
+$buttonValue = FavroiteDatabase::CheckFav($userID, $partnerID);
 //True Means Null
 
 ?>
@@ -47,10 +58,25 @@ $buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
 <div class="container">
     <div class="breadcrumb1">
         <ul>
-            <a href="index.php"><i class="fa fa-home home_1"></i></a>
+            <a href="userhome.php"><i class="fa fa-home home_1"></i></a>
             ->&nbsp;
-            <li class="current-page"><?= $allProfileDetail[0]["FirstName"]." {$allProfileDetail[0]["LastName"]}" ?></li>
+            <li class="current-page"><?= $allProfileDetail[0]["FirstName"] . " {$allProfileDetail[0]["LastName"]}" ?></li>
         </ul>
+    </div>
+
+    <div class="text-center">
+        <b>
+            <?php
+            if ($winkValue == true)
+                echo "Wink Sent";
+            ?>
+        </b>
+        <div>
+        <pre style="background-color: white;border: whitesmoke">
+          <!--  ///This is a spacer-->
+    </pre>
+        </div>
+
     </div>
 
     <div>
@@ -76,7 +102,7 @@ $buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
                 <tr class="opened_1">
 
                     <td class="day_label">Name :</td>
-                    <td class="day_value"><?= $allProfileDetail[0]["FirstName"]." {$allProfileDetail[0]["LastName"]}" ?></td>
+                    <td class="day_value"><?= $allProfileDetail[0]["FirstName"] . " {$allProfileDetail[0]["LastName"]}" ?></td>
                 </tr>
 
                 <tr class="opened_2">
@@ -118,15 +144,25 @@ $buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
 <div class="container">
     <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist">
         <?php
-        if($buttonValue==true){?>
-            <li role="presentation" class=""><a href="../Control/FavroiteValidation.php?id=<?=$partnerID?>" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Add To Your Favorite</a></li>
-        <?php
-        }else{?>
-            <li role="presentation" class=""><a href="../Control/RemoveFromFavValidation.php?id=<?=$partnerID?>" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Remove From Your Favorite</a></li>
-        <?php
-        }?>
+        if ($buttonValue == true) {
+            ?>
+            <li role="presentation" class=""><a href="../Controller/FavroiteValidation.php?id=<?= $partnerID ?>"
+                                                id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+                                                aria-expanded="true">Add To Your Favorite</a></li>
+            <?php
+        } else {
+            ?>
+            <li role="presentation" class=""><a href="../Controller/RemoveFromFavValidation.php?id=<?= $partnerID ?>"
+                                                id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
+                                                aria-expanded="true">Remove From Your Favorite</a></li>
+            <?php
+        } ?>
 
-        <li role="presentation"><a href="./message.php?id=<?=$partnerID?>" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Message</a></li>
+        <li role="presentation"><a href="./message.php?id=<?= $partnerID ?>" role="tab" id="profile-tab"
+                                   data-toggle="tab" aria-controls="profile">Message</a></li>
+
+        <li role="presentation"><a href="./PartnerProfile.php?id=<?= $partnerID ?>&&wink=" role="tab" id="profile-tab"
+                                   data-toggle="tab" aria-controls="profile">Send wink</a></li>
     </ul>
 </div>
 
@@ -135,8 +171,6 @@ $buttonValue=FavroiteDatabase::CheckFav($customerID,$partnerID);
     <hr>
 
 </div>
-
-
 
 
 </div>

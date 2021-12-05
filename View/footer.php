@@ -1,10 +1,9 @@
-
-
 <div class="footer">
     <div class="container">
         <div class="col-md-4 col_2">
             <h4>About Us</h4>
-            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."</p>
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."</p>
         </div>
         <div class="col-md-4  col_2">
             <h4>Help & Support</h4>
@@ -31,10 +30,11 @@
                 <li><a href="#"><i class="fa fa-youtube fa1"> </i></a></li>
             </ul>
         </div>
-        <div class="clearfix"> </div>
+        <div class="clearfix"></div>
         <div class="copy">
-            <p>Copyright © 2021 Marital . All Rights Reserved  | Brought To You By <a href="https://github.com/Anuj16091996" target="_blank">Anuj Narang
-                </a> </p>
+            <p>Copyright © 2021 Marital . All Rights Reserved | Brought To You By <a
+                        href="https://github.com/Anuj16091996" target="_blank">Anuj Narang
+                </a></p>
         </div>
     </div>
 </div>

@@ -2,23 +2,22 @@
 require_once "../Model/CustomerPrefrence.php";
 session_start();
 
-  if(!isset($_SESSION['userEmail'])) {
-      header('Location: ../View/login.php?copyerror');
+if (!isset($_SESSION['userEmail'])) {
+    header('Location: ../View/login.php?copyerror');
 }
 
-if(!isset($_GET['TypeSubmit'])) {
+if (!isset($_GET['TypeSubmit'])) {
     header('Location: ./index.php?error');
 }
 
 
-$search=$_GET["Search"];
-$temp=strtolower($search);
-$value=ucfirst($temp);
-$allResults=CustomerPrefrence::GetSearchFromLike1($value);
+$search = $_GET["Search"];
+$temp = strtolower($search);
+$value = ucfirst($temp);
+$allResults = CustomerPrefrence::GetSearchFromLike1($value);
 
 
-
- ?>
+?>
 
 <html>
 <head>
@@ -36,7 +35,7 @@ $allResults=CustomerPrefrence::GetSearchFromLike1($value);
 </head>
 <body>
 <div>
-    <?php include_once("header.php");?>
+    <?php include_once("header.php"); ?>
 </div>
 <div>
     <pre style="background-color: white;border: whitesmoke">
@@ -54,37 +53,36 @@ $allResults=CustomerPrefrence::GetSearchFromLike1($value);
 </div>
 <div class="container">
     <?php
-    if($allResults==null){
-            echo "<h4 class='text-center'><b> No Data Found</b></h4>";
-    }else{?>
+    if ($allResults == null) {
+        echo "<h4 class='text-center'><b> No Data Found</b></h4>";
+    } else {
+        ?>
 
-        <h4 class='text-center'><b> These User Have <?= $value?></b></h4>
-          <div class="container">
-              <div class="w3-row-padding w3-margin-top">
-                  <?php foreach ($allResults as $number => $array) { ?>
-                      <div class="w3-col s6 m6 l3">
-                          <div class="w3-card-4 w3-margin">
-                              <a href="PartnerProfile.php?id=<?=$array["CustomerID"]?>">
-                                  <img src="./images/<?=$array['ImageName']?>" style="width: 100%; object-fit: cover;">
-                              </a>
-                              <div class="w3-container w3-center">
-                                  <p><?=$array['FirstName'] ." {$array['LastName']}"?></p>
-                              </div>
-                          </div>
-                      </div>
-                  <?php } ?>
-              </div>
-          </div>
-    <?php
+        <h4 class='text-center'><b> These User Have <?= $value ?></b></h4>
+        <div class="container">
+            <div class="w3-row-padding w3-margin-top">
+                <?php foreach ($allResults as $number => $array) { ?>
+                    <div class="w3-col s6 m6 l3">
+                        <div class="w3-card-4 w3-margin">
+                            <a href="PartnerProfile.php?id=<?= $array["CustomerID"] ?>">
+                                <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%; object-fit: cover;">
+                            </a>
+                            <div class="w3-container w3-center">
+                                <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+        <?php
     }
     ?>
-
-
 
 
 </div>
 </body>
 <footer id="con_Us">
-    <?php include_once("footer.php");?>
+    <?php include_once("footer.php"); ?>
 </footer>
 </html>

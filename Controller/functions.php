@@ -8,9 +8,10 @@ function validate_input($input)
 }
 
 
-function String_Has_number(string $input):bool{
-    for($pos=0;$pos<strlen($input);$pos++){
-        if(ctype_digit($input[$pos])){
+function String_Has_number(string $input): bool
+{
+    for ($pos = 0; $pos < strlen($input); $pos++) {
+        if (ctype_digit($input[$pos])) {
             return true;
             break;
         }
@@ -20,8 +21,8 @@ function String_Has_number(string $input):bool{
 
 function Check_Character(string $input): bool
 {
-    $numberCheck=String_Has_number($input);
-    if($numberCheck==true){
+    $numberCheck = String_Has_number($input);
+    if ($numberCheck == true) {
         return false;
     }
 
@@ -34,7 +35,8 @@ function Check_Character(string $input): bool
 }
 
 
-function Check_Password( $input):bool{
+function Check_Password($input): bool
+{
     $lenght = strlen($input);
     if ($lenght < 50) {
         return true;
@@ -54,22 +56,24 @@ function Check_Age(int $input): bool
     }
 }
 
-function Check_Date_Of_Birth($userDateofBirth){
+function Check_Date_Of_Birth($userDateofBirth)
+{
 
 
-    $todayDate=date("Y-m-d");
+    $todayDate = date("Y-m-d");
     $start_date = strtotime($userDateofBirth);
     $end_date = strtotime($todayDate);
 
 
-    $input=$diff = abs($start_date - $end_date);
-    return floor($input / (365*60*60*24));
+    $input = $diff = abs($start_date - $end_date);
+    return floor($input / (365 * 60 * 60 * 24));
 }
 
 
-function Check_Email(string $input):bool{
-    for($pos=0;$pos<strlen($input);$pos++){
-        if($input[$pos]=="@"){
+function Check_Email(string $input): bool
+{
+    for ($pos = 0; $pos < strlen($input); $pos++) {
+        if ($input[$pos] == "@") {
             return true;
             break;
         }
@@ -77,11 +81,12 @@ function Check_Email(string $input):bool{
     return false;
 }
 
-function Check_Array_Lenght($input):bool{
-    $lenght=count($input);
-    if ($lenght>=2){
+function Check_Array_Lenght($input): bool
+{
+    $lenght = count($input);
+    if ($lenght >= 2) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }

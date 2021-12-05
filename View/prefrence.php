@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION["CustForIns"])){
+if (!isset($_SESSION["CustForIns"])) {
     header('Location: ../View/register.php?error');
 }
 ?>
@@ -41,44 +41,43 @@ if(!isset($_SESSION["CustForIns"])){
 
     <div class="services">
         <div class="col-sm-6 login_left">
-            <form action="../Control/prefrenceValidation.php" method="post" enctype="multipart/form-data">
+            <form action="../Controller/prefrenceValidation.php" method="post" enctype="multipart/form-data">
 
                 <div class="form-group form-group1">
                     <label class="col-sm-7 control-lable" for="sex">Intrested In: </label>
                     <input type="radio" class="form-check-input" name="radio1" value="Male" checked>Male
 
-                    <input type="radio" class="form-check-input" name="radio1" value="Female" >Female<br>
+                    <input type="radio" class="form-check-input" name="radio1" value="Female">Female<br>
 
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
 
                 <div class="form-group form-group1">
                     <label class="col-sm-7 control-lable" for="sex">What You Like : </label>
                     <input type="radio" class="form-check-input" name="radio2" value="Chess" checked>Chess
 
-                    <input type="radio" class="form-check-input" name="radio2" value="Gaming" >Gaming<br>
+                    <input type="radio" class="form-check-input" name="radio2" value="Gaming">Gaming<br>
 
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
-
 
 
                 <div class="form-group form-group1">
                     <label class="col-sm-7 control-lable" for="sex">Hobbies: </label>
                     <input type="radio" class="form-check-input" name="radio3" value="Swimming" checked>Swimming
 
-                    <input type="radio" class="form-check-input" name="radio3" value="Others" >Others<br>
+                    <input type="radio" class="form-check-input" name="radio3" value="Others">Others<br>
 
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
 
                 <div class="form-group form-group1">
                     <label class="col-sm-7 control-lable" for="sex">Education : </label>
                     <input type="radio" class="form-check-input" name="radio4" value="Coding" checked>Coding
 
-                    <input type="radio" class="form-check-input" name="radio4" value="Others" >Others<br>
+                    <input type="radio" class="form-check-input" name="radio4" value="Others">Others<br>
 
-                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
                 </div>
 
                 <div class="form-actions">

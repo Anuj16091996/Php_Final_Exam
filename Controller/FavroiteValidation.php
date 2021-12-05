@@ -9,20 +9,16 @@ if (!isset($_SESSION['userEmail'])) {
     header('Location: ../View/login.php?error');
 }
 
-$ID=$_GET["id"];
-$partnerID=json_decode($ID);
-$customerID=$_SESSION["CustomerID"];
-var_dump($partnerID);
-var_dump($customerID);
-
-$InsertToFavroiteBool=FavroiteDatabase::InsertToFavroiteThroughProfile($customerID,$partnerID);
-var_dump($InsertToFavroiteBool);
+$ID = $_GET["id"];
+$partnerID = json_decode($ID);
+$customerID = $_SESSION["CustomerID"];
 
 
-if($InsertToFavroiteBool==false){
+$InsertToFavroiteBool = FavroiteDatabase::InsertToFavroiteThroughProfile($customerID, $partnerID);
 
+if ($InsertToFavroiteBool == false) {
     header('Location: ../View/userHome.php?SucessFav');
-}else{
+} else {
     header('Location: ../View/userHome.php?Noterror');
 }
 

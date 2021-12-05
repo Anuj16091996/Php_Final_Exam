@@ -5,7 +5,7 @@ require_once "../Model/Images.php";
 require_once "../Model/CustomerPrefrence.php";
 require_once "../Model/FavroiteDatabase.php";
 session_start();
-$allUserValues = array("email" => "", "password" => "","AboutUser"=>"", "city" => "", "age" => "", "firstname" => "", "lastname" => "", "sex" => "", "dob" => "");
+$allUserValues = array("email" => "", "password" => "", "AboutUser" => "", "city" => "", "age" => "", "firstname" => "", "lastname" => "", "sex" => "", "dob" => "");
 if (!isset($_POST["Submit"])) {
     header('Location: ../View/register.php?error');
 }
@@ -19,8 +19,8 @@ $lastName = validate_input($_POST['lname']);
 $sex = validate_input($_POST['radio']);
 $dob = validate_input($_POST['dob']);
 $city = validate_input($_POST['city']);
-$aboutUser=$_POST['AboutUser'];
-$allUserValues["AboutUser"]=$aboutUser;
+$aboutUser = $_POST['AboutUser'];
+$allUserValues["AboutUser"] = $aboutUser;
 $allUserValues["email"] = $email;
 $allUserValues["sex"] = $sex;
 
@@ -78,34 +78,28 @@ if ($count == 5) {
     var_dump($imageFile);
     $_SESSION["UserData"] = $allUserValues;
     $emailToInsert = $allUserValues["email"];
-
     $customer = new CustomerTable();
     $images = new Images();
-    $prefrence = new CustomerPrefrence();
-
-    $checkEmailFromdata = $customer->CheckEmail();
-    if ($checkEmailFromdata == true) {
+    $preference = new CustomerPrefrence();
+    $checkEmailFromData = $customer->CheckEmail();
+    if ($checkEmailFromData == true) {
         header('Location: ../View/register.php?emailExits');
     } else {
-        if ($imageFile['size'] <= 300000)
-        {
-            $allowedTypes = array(IMAGETYPE_JPEG,IMAGETYPE_PNG, IMAGETYPE_GIF);
+        if ($imageFile['size'] <= 300000) {
+            $allowedTypes = array(IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF);
             $detectedType = exif_imagetype($imageFile['tmp_name']);
             $error = !in_array($detectedType, $allowedTypes);
             if (!$error) {
                 //Normally: Rename file to something that will not conflict.
-
                 $filename = $email;
                 var_dump($filename);
-
                 $extension = pathinfo($_FILES['fileToUploads']["name"], PATHINFO_EXTENSION);
-
                 $basename = $filename . "." . $extension;
                 move_uploaded_file($_FILES['fileToUploads']['tmp_name'], "../View/images/{$basename}");
-                $_SESSION["ImageExtension"]=$basename;
+                $_SESSION["ImageExtension"] = $basename;
                 $customer->InsertIntoCustomer();
                 $Customer_Id = $images->GetImageId($emailToInsert);
-                $_SESSION["CustForIns"]=$Customer_Id;
+                $_SESSION["CustForIns"] = $Customer_Id;
                 $images->InsertIntoImage($Customer_Id);
                 FavroiteDatabase::InsertIntoFav($Customer_Id);
                 header('Location: ../View/prefrence.php');
@@ -113,12 +107,9 @@ if ($count == 5) {
             } else {
                 header('Location: ../View/register.php?imgtype');
             }
-        }
-        else {
+        } else {
             header('Location: ../View/register.php?imgtypes');
         }
-
-
 
 
     }

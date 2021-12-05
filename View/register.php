@@ -3,33 +3,32 @@ if (isset($_GET['error'])) {
     echo '<script>alert("Invalid Input")</script>';
 }
 
-if(isset($_GET['passworderror'])){
+if (isset($_GET['passworderror'])) {
     echo '<script>alert("Invalid Password Try Again")</script>';
 }
 
-if(isset($_GET['nameerror'])){
+if (isset($_GET['nameerror'])) {
     echo '<script>alert("Invalid Name Try Again")</script>';
 }
-if(isset($_GET['ageerror'])){
+if (isset($_GET['ageerror'])) {
     echo '<script>alert("Invalid Age or DOB Try Again")</script>';
 }
 
-if(isset($_GET['emailExits'])){
+if (isset($_GET['emailExits'])) {
     echo '<script>alert("Email Already Exists")</script>';
 }
 
-if(isset($_GET['city'])){
+if (isset($_GET['city'])) {
     echo '<script>alert("Invalid Input City")</script>';
 }
 
-if(isset($_GET['imgtype'])){
+if (isset($_GET['imgtype'])) {
     echo '<script>alert("Invalid Image Type")</script>';
 }
 
-if(isset($_GET['imgtypes'])){
+if (isset($_GET['imgtypes'])) {
     echo '<script>alert("File To Big")</script>';
 }
-
 
 
 ?>
@@ -37,8 +36,8 @@ if(isset($_GET['imgtypes'])){
 <html>
 
 <head>
-    <link href="../css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css' />
-    <link href="../css/style.css" rel='stylesheet' type='text/css' />
+    <link href="../css/bootstrap-3.1.1.min.css" rel='stylesheet' type='text/css'/>
+    <link href="../css/style.css" rel='stylesheet' type='text/css'/>
     <link href='//fonts.googleapis.com/css?family=Oswald:300,400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
     <link href="../css/font-awesome.css" rel="stylesheet">
@@ -46,7 +45,7 @@ if(isset($_GET['imgtypes'])){
 </head>
 
 <body>
-<?php include_once("header.php");?>
+<?php include_once("header.php"); ?>
 
 <!--Form Code-->
 <div class="grid_3">
@@ -61,51 +60,64 @@ if(isset($_GET['imgtypes'])){
         <div class="services">
             <div class="col-sm-6 login_left">
 
-                <form action="../Control/validation.php" method="post" enctype="multipart/form-data">
+                <form action="../Controller/validation.php" method="post" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="edit-name">Email <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text"  required id="edit-name" name="email" value="" size="60" maxlength="60" class="form-text required">
+                        <label for="edit-name">Email <span class="form-required"
+                                                           title="This field is required.">*</span></label>
+                        <input type="text" required id="edit-name" name="email" value="" size="60" maxlength="60"
+                               class="form-text required">
                     </div>
 
 
-
                     <div class="form-group">
-                        <label for="edit-pass">Password <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="password"  required id="edit-pass" name="pass" size="60" maxlength="128" class="form-text required">
+                        <label for="edit-pass">Password <span class="form-required"
+                                                              title="This field is required.">*</span></label>
+                        <input type="password" required id="edit-pass" name="pass" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-pass">Confrim Password <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="password"  required id="edit-pass" name="cpass" size="60" maxlength="128" class="form-text required">
+                        <label for="edit-pass">Confrim Password <span class="form-required"
+                                                                      title="This field is required.">*</span></label>
+                        <input type="password" required id="edit-pass" name="cpass" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">Age <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="number"   required id="edit-pass" name="age" size="60" maxlength="128" class="form-text required">
+                        <input type="number" required id="edit-pass" name="age" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
                     <div class="form-group">
-                        <label for="edit-pass">FirstName <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" required  id="edit-pass" name="fname" size="60" maxlength="128" class="form-text required">
+                        <label for="edit-pass">FirstName <span class="form-required"
+                                                               title="This field is required.">*</span></label>
+                        <input type="text" required id="edit-pass" name="fname" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-pass">LastName <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text"   required id="edit-pass" name="lname" size="60" maxlength="128" class="form-text required">
+                        <label for="edit-pass">LastName <span class="form-required"
+                                                              title="This field is required.">*</span></label>
+                        <input type="text" required id="edit-pass" name="lname" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
 
                     <div class="form-group">
                         <label for="edit-pass">City <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="text" required   id="edit-pass" name="city" size="60" maxlength="128" class="form-text required">
+                        <input type="text" required id="edit-pass" name="city" size="60" maxlength="128"
+                               class="form-text required">
                     </div>
 
                     <div class="form-group">
-                        <label for="edit-pass">Image <span class="form-required" title="This field is required.">*</span></label>
-                        <input type="file" required  name="fileToUploads" id="fileID"><br>
+                        <label for="edit-pass">Image <span class="form-required"
+                                                           title="This field is required.">*</span></label>
+                        <input type="file" required name="fileToUploads" id="fileID"><br>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="edit-pass">About YourSelf <span class="form-required" title="This field is required.">*</span></label>
+                        <label for="edit-pass">About YourSelf <span class="form-required"
+                                                                    title="This field is required.">*</span></label>
                         <textarea id="w3review" name="AboutUser" rows="4" cols="50">
 
                         </textarea>
@@ -116,18 +128,17 @@ if(isset($_GET['imgtypes'])){
                         <label class="col-sm-7 control-lable" for="sex">Sex : </label>
                         <input type="radio" class="form-check-input" name="radio" value="Male" checked>Male
 
-                        <input type="radio" class="form-check-input" name="radio" value="Female" >Female<br>
+                        <input type="radio" class="form-check-input" name="radio" value="Female">Female<br>
 
-                        <div class="clearfix"> </div>
+                        <div class="clearfix"></div>
                     </div>
 
 
-
                     <div class="form-group">
-                    <label for="edit-pass">DateOfBirth: <span class="form-required" title="This field is required.">*</span></label>
-                    <input type="date"  required id="edit-pass" value="1996-09-16" name="dob" size="60" maxlength="128" class="form-text required">
-            </div>
-
+                        <label for="edit-pass">DateOfBirth: <span class="form-required" title="This field is required.">*</span></label>
+                        <input type="date" required id="edit-pass" value="1996-09-16" name="dob" size="60"
+                               maxlength="128" class="form-text required">
+                    </div>
 
 
                     <div class="form-actions">
@@ -137,10 +148,10 @@ if(isset($_GET['imgtypes'])){
             </div>
 
 
-                </form>
+            </form>
 
-            <div ><?php  include_once "shareicons.php"; ?> </div>
-            <div class="clearfix"> </div>
+            <div><?php include_once "shareicons.php"; ?> </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
@@ -149,6 +160,6 @@ if(isset($_GET['imgtypes'])){
 </body>
 
 <footer id="con_Us">
-    <?php include_once("footer.php");?>
+    <?php include_once("footer.php"); ?>
 </footer>
 </html>

@@ -3,43 +3,44 @@ require_once "../Model/CustomerTable.php";
 require_once "../Model/Images.php";
 require_once "../Model/CustomerPrefrence.php";
 require_once "../Model/FavroiteDatabase.php";
+require_once "../Model/WinkDatabase.php";
 session_start();
 if (!isset($_SESSION['userEmail'])) {
     header('Location: ../View/login.php?copyerror');
 }
 
-if(isset($_GET['Noterror'])){
+if (isset($_GET['Noterror'])) {
     echo '<script>alert("Already Exists In the Favroite List")</script>';
 }
-if(isset($_GET['SucessFav'])){
+if (isset($_GET['SucessFav'])) {
     echo '<script>alert("Added To Favorite.")</script>';
 }
 
-if(isset($_GET['SucessFavR'])){
+if (isset($_GET['SucessFavR'])) {
     echo '<script>alert("Remove From Favorite.")</script>';
 }
-
-
 
 
 $imageClass = new Images();
 $userEmail = $_SESSION['userEmail'];
 $UserName = CustomerTable::GetName($userEmail);
 $UserID = $imageClass->GetImageId($userEmail);
-$_SESSION["CustomerID"]=$UserID;
+$_SESSION["CustomerID"] = $UserID;
 $imageName = Images::GetImageName($UserID);
-$allDeatils = CustomerTable::GetAlldetails($userEmail);
-$allPrefrence = CustomerPrefrence::GetAllPrefrnce($UserID);
-$userIntrest=CustomerPrefrence::GetIntrestOfUser($UserID);
-$userSex = $userIntrest[0]['IntrestedIn'];
-$allPrfoiles = CustomerTable::GetWholeTableDetails($userSex);
-$userLike=FavroiteDatabase::LikeUser($UserID);
-$partnerLike=FavroiteDatabase::UserLike($UserID);
+$allDetails = CustomerTable::GetAlldetails($userEmail);
+$allPreference = CustomerPrefrence::GetAllPrefrnce($UserID);
+$userInterest = CustomerPrefrence::GetIntrestOfUser($UserID);
+$userSex = $userInterest[0]['IntrestedIn'];
+$allProfiles = CustomerTable::GetWholeTableDetails($userSex, $UserID);
+$userLike = FavroiteDatabase::LikeUser($UserID);
+$partnerLike = FavroiteDatabase::UserLike($UserID);
+$winkByProfiles = WinkDatabase::GetAllWinks($UserID);
+$winkBYYou = WinkDatabase::SendWinksData($UserID);
 
-if(isset($_GET['suc'])){
+
+if (isset($_GET['suc'])) {
     echo '<script>alert("Deatils Updated")</script>';
 }
-
 
 
 ?>
@@ -108,32 +109,32 @@ if(isset($_GET['suc'])){
 
                 <tr class="opened_2">
                     <td class="day_label">Age :</td>
-                    <td class="day_value"><?php echo $allDeatils[0]["Age"] . " Years"; ?> </td>
+                    <td class="day_value"><?php echo $allDetails[0]["Age"] . " Years"; ?> </td>
                 </tr>
                 <tr class="opened">
                     <td class="day_label">City :</td>
-                    <td class="day_value"><?php echo $allDeatils[0]["City"]; ?></td>
+                    <td class="day_value"><?php echo $allDetails[0]["City"]; ?></td>
                 </tr>
                 <tr class="opened">
                     <td class="day_label">What I Like :</td>
-                    <td class="day_value"><?php echo $allPrefrence[0]['Like1'] ?></td>
+                    <td class="day_value"><?php echo $allPreference[0]['Like1'] ?></td>
                 </tr>
                 <tr class="opened">
                     <td class="day_label">Place to Devlop Strategy :</td>
-                    <td class="day_value"><?php echo $allPrefrence[0]['Like2']; ?></td>
+                    <td class="day_value"><?php echo $allPreference[0]['Like2']; ?></td>
                 </tr>
                 <tr class="opened">
                     <td class="day_label">About Me :</td>
-                    <td class="day_value"><?php echo $allDeatils[0]['AboutMe']; ?></td>
+                    <td class="day_value"><?php echo $allDetails[0]['AboutMe']; ?></td>
                 </tr>
 
                 <tr class="opened">
                     <td class="day_label">Intrested In :</td>
-                    <td class="day_value"><?php echo $allPrefrence[0]['IntrestedIn']; ?></td>
+                    <td class="day_value"><?php echo $allPreference[0]['IntrestedIn']; ?></td>
                 </tr>
                 <tr class="closed">
                     <td class="day_label">Things I prefer :</td>
-                    <td class="day_value closed"><span><?php echo $allPrefrence[0]['Like3']; ?></span></td>
+                    <td class="day_value closed"><span><?php echo $allPreference[0]['Like3']; ?></span></td>
                 </tr>
 
                 </tbody>
@@ -144,48 +145,48 @@ if(isset($_GET['suc'])){
 </div>
 <div>
     <pre style="background-color: white;border: whitesmoke">
-          <!--  ///This is a spacer-->
+
     </pre>
 </div>
 <div class="container">
-    <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist"">
+    <ul id="myTab" class="nav nav-tabs nav-tabs1" role="tablist"
+    ">
 
-        <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
-                                   aria-controls="profile">Explore</a></li>
+    <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab"
+                                              aria-controls="profile">Explore</a></li>
 
-        <li role="presentation"><a href="#profile2" role="tab" id="profile-tab" data-toggle="tab"
-                                   aria-controls="profile">See Who Add You as Their Favroite</a></li>
+    <li role="presentation"><a href="#profile2" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Profiles Who Add You as Their Favorite</a></li>
 
-        <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab"
-                                   aria-controls="profile">See Who You Add as Your Favroite</a></li>
+    <li role="presentation"><a href="#profile3" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Added by you as your Favorite</a></li>
 
-    <li role="presentation"><a href="ModifyPersonalDetails.php" role="tab" id="profile-tab" data-toggle="tab"
-                               aria-controls="profile">Modify your Personal Details</a></li>
+    <li role="presentation"><a href="#profile4" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Profiles who wink at you</a></li>
 
-    <li role="presentation"><a href="ModifyPrefrence.php" role="tab" id="profile-tab" data-toggle="tab"
-                               aria-controls="profile">Modify your Prefrences</a></li>
+    <li role="presentation"><a href="#profile5" role="tab" id="profile-tab" data-toggle="tab"
+                               aria-controls="profile">Wink send by you</a></li>
+
 
     </ul>
 </div>
-
-
 
 
 <div class="container" id="profile">
     <hr>
 
     <div class="w3-row-padding w3-margin-top">
-        <?php foreach ($allPrfoiles as $number => $array) { ?>
-        <div class="w3-col s6 m6 l3">
-            <div class="w3-card-4 w3-margin">
-                <a href="PartnerProfile.php?id=<?=$array["CustomerID"]?>">
-                    <img src="./images/<?=$array['ImageName']?>" style="width: 100%;">
-                </a>
-                <div class="w3-container w3-center">
-                    <p><?=$array['FirstName'] ." {$array['LastName']}"?></p>
+        <?php foreach ($allProfiles as $number => $array) { ?>
+            <div class="w3-col s6 m6 l3">
+                <div class="w3-card-4 w3-margin">
+                    <a href="PartnerProfile.php?id=<?= $array["CustomerID"] ?>">
+                        <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%;">
+                    </a>
+                    <div class="w3-container w3-center">
+                        <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
+                    </div>
                 </div>
             </div>
-        </div>
         <?php } ?>
     </div>
 
@@ -198,11 +199,11 @@ if(isset($_GET['suc'])){
         <?php foreach ($userLike as $number => $array) { ?>
             <div class="w3-col s6 m6 l3">
                 <div class="w3-card-4 w3-margin">
-                    <a href="PartnerProfile.php?id=<?=$array["CustomerID"]?>">
-                        <img src="./images/<?=$array['ImageName']?>" style="width: 100%;">
+                    <a href="PartnerProfile.php?id=<?= $array["CustomerID"] ?>">
+                        <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%;">
                     </a>
                     <div class="w3-container w3-center">
-                        <p><?=$array['FirstName'] ." {$array['LastName']}"?></p>
+                        <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
                     </div>
                 </div>
             </div>
@@ -218,11 +219,53 @@ if(isset($_GET['suc'])){
         <?php foreach ($partnerLike as $number => $array) { ?>
             <div class="w3-col s6 m6 l3">
                 <div class="w3-card-4 w3-margin">
-                    <a href="PartnerProfile.php?id=<?=$array["ParnerId"]?>">
-                        <img src="./images/<?=$array['ImageName']?>" style="width: 100%;">
+                    <a href="PartnerProfile.php?id=<?= $array["ParnerId"] ?>">
+                        <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%;">
                     </a>
                     <div class="w3-container w3-center">
-                        <p><?=$array['FirstName'] ." {$array['LastName']}"?></p>
+                        <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <hr>
+</div>
+
+
+<div class="container" id="profile4">
+    <hr>
+    <h4 class="text-center"><b>Profiles who wink at you: </b></h4>
+    <div class="w3-row-padding w3-margin-top">
+
+        <?php foreach ($winkBYYou as $number => $array) { ?>
+            <div class="w3-col s6 m6 l3">
+                <div class="w3-card-4 w3-margin">
+                    <a href="PartnerProfile.php?id=<?= $array["ParnerId"] ?>">
+                        <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%;">
+                    </a>
+                    <div class="w3-container w3-center">
+                        <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <hr>
+</div>
+
+<div class="container" id="profile5">
+    <hr>
+    <h4 class="text-center"><b>Profiles you wink at : </b></h4>
+    <div class="w3-row-padding w3-margin-top">
+        <?php foreach ($winkByProfiles as $number => $array) { ?>
+            <div class="w3-col s6 m6 l3">
+                <div class="w3-card-4 w3-margin">
+                    <a href="PartnerProfile.php?id=<?= $array["ParnerId"] ?>">
+                        <img src="./images/<?= $array['ImageName'] ?>" style="width: 100%;">
+                    </a>
+                    <div class="w3-container w3-center">
+                        <p><?= $array['FirstName'] . " {$array['LastName']}" ?></p>
                     </div>
                 </div>
             </div>

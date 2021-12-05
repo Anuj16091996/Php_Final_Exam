@@ -9,16 +9,15 @@ if (!isset($_SESSION['userEmail'])) {
     header('Location: ../View/login.php?error');
 }
 
-$ID=$_GET["id"];
-$partnerID=json_decode($ID);
-$customerID=$_SESSION["CustomerID"];
-var_dump($partnerID);
-var_dump($customerID);
+$ID = $_GET["id"];
+$partnerID = json_decode($ID);
+$customerID = $_SESSION["CustomerID"];
 
-$DeleteFromFav=FavroiteDatabase::DeleteToFavroiteThroughProfile($customerID,$partnerID);
-var_dump($DeleteFromFav);
 
-if($DeleteFromFav==false){
+$DeleteFromFav = FavroiteDatabase::DeleteToFavroiteThroughProfile($customerID, $partnerID);
+
+
+if ($DeleteFromFav == false) {
 
     header('Location: ../View/userHome.php?SucessFavR');
 }
