@@ -26,7 +26,6 @@ $PartnerMessage = MessageDataBase::ReadMessage($PartnerID, $UserID);
 if ($PartnerMessage != null) {
     MessageDataBase::UpdateReadMessage($PartnerID, $UserID);
 }
-$userSendingMessage = MessageDataBase::ReadMessage($UserID, $PartnerID);
 $UserMessage = MessageDataBase::AllMessages($UserID, $PartnerID);
 
 
