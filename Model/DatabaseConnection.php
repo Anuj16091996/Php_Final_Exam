@@ -3,7 +3,7 @@
 class DatabaseConnection
 {
     private const _serverName = "localhost";
-    private const _port = 3307;
+    private const _port = 3306;
     private const _database = "dating";
     private const _username = "project";
     private const _password = "project";
